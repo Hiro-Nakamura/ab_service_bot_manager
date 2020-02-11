@@ -50,11 +50,12 @@ module.exports = {
 
     // create a bot
     bot = new SlackBot({
-      token: config.slackBot.botToken, // Add a bot https://my.slack.com/services/new/bot and put the token
+      token: config.slackBot
+        .botToken, // Add a bot https://my.slack.com/services/new/bot and put the token
       name: config.slackBot.botName
     });
 
-    bot.on("start", function() {
+    bot.on("start", function () {
       // get the channelID of the desired channel to interact with
       bot.getChannelId(config.slackBot.channel).then(id => {
         channelID = id;
@@ -78,7 +79,7 @@ module.exports = {
       bot.postMessageToChannel(config.slackBot.channel, `online!`);
     });
 
-    bot.on("message", function(data) {
+    bot.on("message", function (data) {
       // all ingoing events https://api.slack.com/rtm
       // console.log('message:', data);
       if (data.type == "message") {
